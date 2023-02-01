@@ -1,4 +1,4 @@
-var n = 0;
+var n = 200;
 var c = 6;
 
 
@@ -14,75 +14,74 @@ let velr = 0.03; // velocidad de rotacion
 let mouseR;
 
 function setup() {
- mouseR = createCanvas(1080, 1080);
+ mouseR = createCanvas(xborde, yborde);
   angleMode(DEGREES);
   colorMode(HSB);
+// control de frames
+  frameRate (30);
   
   mouseR.mouseWheel(velrotacion);
   
 }
 
 function draw() {
-  background(2);
+  // background(255);
 
-  createCanvas(xborde, yborde);
+  createCanvas(1000, 600);
   translate(width / 2, height / 2);
 
 
 //Para la rotación
   rotate(n *velr);
-  if (velr < 0){
-rotate ('stop')
-    
-  }if (velr > 0){
-    rotate ('false')
-        
-      }
+
       
   
  
   for (let i = 0; i < n; i++) {
-    // if (i > xborde){
-    //  n ('false')
+    
 
-    // }
-    // if (i > yborde){
-    //   n ('false')
- 
-    //  }
-
-
-    var a = i *  137.5;
+//angulos y raiz
+    var a = i *  137.9;
     var r = c * sqrt(i);
-    var x = r * cos(a);
-    var y = r * sin(a);
+
+// controladores de movimiento en x y
+    var x1 = r * cos(a);
+    var y1 = r * sin(a);
+
+
+    var x2 = r * cos(i);
+    var y2 = r * sin(i);
+  
         //ecucación de philotaxis
     var hu = sin(start + i * 0.5);
-    //Mapeo de colore
+
+
+    //Mapeo de colores
     hu = map(hu, -1, 1, 0, 360);
     
     fill(255, hu, 255);
     noStroke();
-    ellipse(x, y, c+1, c+1);
+    ellipse(x1, y1, c+1, c+1);
+
     
     
-    // triangle(x, y, 500, 100, 122, 0);
+   
 
   }
   
   n += 5;
-  start += 0.01;
+  start += 1;
 }
 
 
 //Controla la velocidad de rotación
 function velrotacion (event) {
-
+//variacion de velocidad
   if (event.deltaY > 0){
-  velr = velr - 0.01;
+  velr = velr - 0.1;
 
 } else {
-  velr = velr +0.01;
+  velr = velr +0.1;
 }
 print (velr);
 
