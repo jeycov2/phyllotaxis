@@ -1,43 +1,58 @@
 var n = 0;
 var c = 6;
 
+
+let xborde = 1000;
+let yborde = 1000;
+
 var points = [];
 
 var start = 0; //para la variación de colores
 
 
-
-let vel = 0.03; // velocidad de rotacion
-
-
-function mouseWheel() {
-  g = g + 10;
-  print (g);
-  }
-
+let velr = 0.03; // velocidad de rotacion
+let mouseR;
 
 function setup() {
-  createCanvas(1080, 1080);
+ mouseR = createCanvas(1080, 1080);
   angleMode(DEGREES);
   colorMode(HSB);
+  
+  mouseR.mouseWheel(velrotacion);
   
 }
 
 function draw() {
-  background(255);
+  background(2);
 
-  createCanvas(500, 500);
+  createCanvas(xborde, yborde);
   translate(width / 2, height / 2);
 
 
-
-  rotate(n *vel);
-  
+//Para la rotación
+  rotate(n *velr);
+  if (velr < 0){
+rotate ('stop')
+    
+  }if (velr > 0){
+    rotate ('false')
+        
+      }
+      
   
  
   for (let i = 0; i < n; i++) {
+    // if (i > xborde){
+    //  n ('false')
 
-    var a = i * 137.9;
+    // }
+    // if (i > yborde){
+    //   n ('false')
+ 
+    //  }
+
+
+    var a = i *  137.5;
     var r = c * sqrt(i);
     var x = r * cos(a);
     var y = r * sin(a);
@@ -59,3 +74,16 @@ function draw() {
   start += 0.01;
 }
 
+
+//Controla la velocidad de rotación
+function velrotacion (event) {
+
+  if (event.deltaY > 0){
+  velr = velr - 0.01;
+
+} else {
+  velr = velr +0.01;
+}
+print (velr);
+
+}
