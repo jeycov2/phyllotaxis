@@ -25,13 +25,13 @@ function setup() {
 }
 
 function draw() {
-  // background(255);
+  background(225);
 
-  createCanvas(1000, 600);
+  createCanvas(1000, 700);
   translate(width / 2, height / 2);
 
 
-//Para la rotación
+//Para la rotación con el mouse
   rotate(n *velr);
 
       
@@ -41,17 +41,19 @@ function draw() {
     
 
 //angulos y raiz
-    var a = i *  137.9;
+    var a = i *  137.5;
     var r = c * sqrt(i);
 
 // controladores de movimiento en x y
     var x1 = r * cos(a);
     var y1 = r * sin(a);
 
+    var xv = r * cos((i + 0.5)*137.5);
+    var yv = r * sin((i + 0.5)*137.5);
 
-    var x2 = r * cos(i);
-    var y2 = r * sin(i);
   
+
+
         //ecucación de philotaxis
     var hu = sin(start + i * 0.5);
 
@@ -59,17 +61,26 @@ function draw() {
     //Mapeo de colores
     hu = map(hu, -1, 1, 0, 360);
     
-    fill(255, hu, 255);
+    fill(255, hu+2, 255);
     noStroke();
-    ellipse(x1, y1, c+1, c+1);
+    ellipse(x1, y1, c+0.1, c+0.1);
+
+let x= lerp(x1,xv, 1);
+let y= lerp(y1,yv, 1);
+
+
+    fill(hu, hu *a, 255,1);
+    noStroke();
+    ellipse(x, y, 5, 5);
 
     
+  
     
-   
+  
 
   }
   
-  n += 5;
+  n += 0.01;
   start += 1;
 }
 
