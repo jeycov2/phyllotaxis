@@ -3,14 +3,14 @@ var c = 6;
 
 
 let xborde = 1000;
-let yborde = 1000;
+let yborde = 700;
 
 var points = [];
 
 var start = 0; //para la variación de colores
 
 
-let velr = 0.03; // velocidad de rotacion
+let velr = 0.03; // incremento de velocidad
 let mouseR;
 
 function setup() {
@@ -25,9 +25,8 @@ function setup() {
 }
 
 function draw() {
-  background(225);
+  background(225,0,225,0.1);
 
-  createCanvas(1000, 700);
   translate(width / 2, height / 2);
 
 
@@ -48,8 +47,9 @@ function draw() {
     var x1 = r * cos(a);
     var y1 = r * sin(a);
 
-    var xv = r * cos((i + 0.5)*137.5);
-    var yv = r * sin((i + 0.5)*137.5);
+//controladores de movimiento en x y variables
+    var xv = r * cos((i + 0.5)*137.9);
+    var yv = r * sin((i + 0.5)*137.9);
 
   
 
@@ -61,17 +61,17 @@ function draw() {
     //Mapeo de colores
     hu = map(hu, -1, 1, 0, 360);
     
-    fill(255, hu+2, 255);
+    fill(25, hu+2, 100);
     noStroke();
     ellipse(x1, y1, c+0.1, c+0.1);
+//incremento de x y y
+let x= lerp(x1,xv-hu, 1);
+let y= lerp(y1,yv-hu, 1);
 
-let x= lerp(x1,xv, 1);
-let y= lerp(y1,yv, 1);
-
-
-    fill(hu, hu *a, 255,1);
+//ovalos
+    fill(r, hu *i, 255,0.2);
     noStroke();
-    ellipse(x, y, 5, 5);
+    ellipse(x, y, 10, 10);
 
     
   
@@ -80,8 +80,8 @@ let y= lerp(y1,yv, 1);
 
   }
   
-  n += 0.01;
-  start += 1;
+  n += 0.3;
+  start += 2;
 }
 
 
@@ -89,10 +89,10 @@ let y= lerp(y1,yv, 1);
 function velrotacion (event) {
 //variacion de velocidad
   if (event.deltaY > 0){
-  velr = velr - 0.1;
+  velr = velr - 0.9;
 
 } else {
-  velr = velr +0.1;
+  velr = velr +0.9;
 }
 print (velr);
 
