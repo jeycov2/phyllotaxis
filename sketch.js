@@ -3,11 +3,11 @@ var c = 6;
 
 var points = [];
 
-var start = 0;
+var start = 0; //para la variación de colores
 
 
 
-let vel = 0.03;
+let vel = 0.03; // velocidad de rotacion
 
 
 function mouseWheel() {
@@ -36,11 +36,12 @@ function draw() {
   
  
   for (let i = 0; i < n; i++) {
-    
+
     var a = i * 137.9;
     var r = c * sqrt(i);
     var x = r * cos(a);
     var y = r * sin(a);
+        //ecucación de philotaxis
     var hu = sin(start + i * 0.5);
     //Mapeo de colore
     hu = map(hu, -1, 1, 0, 360);
@@ -55,6 +56,6 @@ function draw() {
   }
   
   n += 5;
-  start += 0.1;
+  start += 0.01;
 }
 
