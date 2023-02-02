@@ -1,9 +1,29 @@
-var n = 200;
-var c = 6;
+//Phyllotaxis doble con variación de velocidad
 
 
-let xborde = 1000;
-let yborde = 700;
+// Inspirado del video del Don Daniel Shiffman
+// Especificamente- de este video- https://www.youtube.com/watch?v=KWoJgHFYWxY&t=322s
+
+//Realizado por
+//     ___  _______       ___    ___ 
+//    |\  \|\  ___ \     |\  \  /  /|
+//    \ \  \ \   __/|    \ \  \/  / /
+//  __ \ \  \ \  \_|/__   \ \    / / 
+// |\  \\_\  \ \  \_|\ \   \/  /  /  
+// \ \________\ \_______\__/  / /    
+//  \|________|\|_______|\___/ /     
+//                      \|___|/      
+                                                            
+  //  O Jacobo Narváez                               
+// -
+// -
+// -
+// -
+// -
+var n = 200; //numero de elementos generados al inicio
+var c = 6;//Tamaño general
+
+
 
 var points = [];
 
@@ -13,8 +33,10 @@ var start = 0; //para la variación de colores
 let velr = 0.03; // incremento de velocidad
 let mouseR;
 
+
+
 function setup() {
- mouseR = createCanvas(xborde, yborde);
+ mouseR = createCanvas(1000, 600);
   angleMode(DEGREES);
   colorMode(HSB);
 // control de frames
@@ -22,13 +44,21 @@ function setup() {
   
   mouseR.mouseWheel(velrotacion);
   
+ 
 }
 
 function draw() {
   background(225,0,225,0.1);
 
-  translate(width / 2, height / 2);
+//Txto
+  textSize(16);
+  strokeWeight(0.5);
+  textAlign(CENTER, TOP);
+  text('Scroll para variar velocidad', 0, 12, width);
 
+  cursor(CROSS);
+  translate(width / 2, height / 2);
+  
 
 //Para la rotación con el mouse
   rotate(n *velr);
@@ -40,7 +70,7 @@ function draw() {
     
 
 //angulos y raiz
-    var a = i *  137.5;
+    var a = i *  137.7;
     var r = c * sqrt(i);
 
 // controladores de movimiento en x y
@@ -60,16 +90,16 @@ function draw() {
 
     //Mapeo de colores
     hu = map(hu, -1, 1, 0, 360);
-    
-    fill(25, hu+2, 100);
+    //mandala
+    fill(25, hu*2, 100);
     noStroke();
     ellipse(x1, y1, c+0.1, c+0.1);
 //incremento de x y y
-let x= lerp(x1,xv-hu, 1);
-let y= lerp(y1,yv-hu, 1);
+let x= lerp(x1,xv/hu, 1);
+let y= lerp(y1,yv*hu, 1);
 
-//ovalos
-    fill(r, hu *i, 255,0.2);
+//ola
+    fill(hu,225, 255,0.2);
     noStroke();
     ellipse(x, y, 10, 10);
 
@@ -80,8 +110,8 @@ let y= lerp(y1,yv-hu, 1);
 
   }
   
-  n += 0.3;
-  start += 2;
+  n += 0.1;
+  start += 1; //no mover
 }
 
 
@@ -89,11 +119,13 @@ let y= lerp(y1,yv-hu, 1);
 function velrotacion (event) {
 //variacion de velocidad
   if (event.deltaY > 0){
-  velr = velr - 0.9;
+  velr = velr - 2;
 
 } else {
-  velr = velr +0.9;
+  velr = velr +2;
 }
 print (velr);
 
 }
+
+
